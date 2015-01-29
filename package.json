@@ -1,0 +1,35 @@
+{
+  "name": "ngdrupal",
+  "description": "Angular module for Drupal 8 Rest Services.",
+  "version": "1.0",
+  "filename": "ngdrupal.js",
+  "homepage": "https://github.com/marthinal/ngDrupal",
+  "author": {
+    "name": "José Manuel Rodríguez Velez(marthinal)",
+    "email": "jm.rodriguez.velez@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marthinal/ngDrupal.git"
+  },
+  "engines": {
+    "node": ">= 0.9"
+  },
+  "keywords": [
+    "angular",
+    "client",
+    "browser",
+    "restful",
+    "resources",
+    "rest"
+  ],
+  "maintainers": [
+    {
+      "name": "marthinal",
+      "email": "jm.rodriguez.velez@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "restangular": ">=1.4.0"
+  }
+}
