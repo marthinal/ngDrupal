@@ -1,5 +1,5 @@
 {
-  "name": "ngDrupal",
+  "name": "ngdrupal",
   "version": "1.0.0",
   "description": "Angular module for Drupal Rest Services.",
   "main": "src/ngdrupal.js",
