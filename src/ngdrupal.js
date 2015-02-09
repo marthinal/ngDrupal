@@ -11,11 +11,24 @@
     // Login Service.
     // Apply https://www.drupal.org/node/2403307
     // and https://www.drupal.org/node/2419825
-    .factory('loginService', function($http, Restangular) {
+    .factory('loginService', function(Restangular) {
       return {
         login:function(user) {
           return Restangular.one('user_login').customPOST(
             JSON.stringify({"op": "login","credentials": {"name":user.name,"pass":user.pass}}),
+            undefined, // put your path here
+            undefined, // params here, e.g. {format: "json"}
+            {ContentType: 'application/json', Accept: 'application/json'}
+          );
+        }
+      }
+    })
+
+    .factory('logoutService', function(Restangular) {
+      return {
+        logout:function() {
+          return Restangular.one('user_login').customPOST(
+            JSON.stringify({"op": "logout"}),
             undefined, // put your path here
             undefined, // params here, e.g. {format: "json"}
             {ContentType: 'application/json', Accept: 'application/json'}
