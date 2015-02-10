@@ -24,15 +24,29 @@
       }
     })
 
-    .factory('logoutService', function(Restangular) {
+    // Logout Service.
+    .factory('logoutService', function(Restangular, getTokenService) {
       return {
-        logout:function() {
-          return Restangular.one('user_login').customPOST(
-            JSON.stringify({"op": "logout"}),
-            undefined, // put your path here
-            undefined, // params here, e.g. {format: "json"}
-            {ContentType: 'application/json', Accept: 'application/json'}
+        logout:function(token) {
+          return getTokenService.getToken()
+            .then(function(token) {
+              return Restangular.one('user_login').customPOST(
+                JSON.stringify({"op": "logout"}),
+                undefined, // put your path here
+                undefined, // params here, e.g. {format: "json"}
+                {ContentType: 'application/json', Accept: 'application/json', 'X-CSRF-Token': token}
+              );
+            }
           );
+        }
+      }
+    })
+
+    // Get token Service.
+    .factory('getTokenService', function(Restangular) {
+      return {
+        getToken:function() {
+          return Restangular.one('rest/session/token').get();
         }
       }
     })
