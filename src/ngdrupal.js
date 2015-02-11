@@ -42,6 +42,20 @@
       }
     })
 
+    // Register Service. Depends on https://www.drupal.org/node/2291055 .
+    .factory('registerService', function(Restangular) {
+      return {
+        register:function(user) {
+          return Restangular.one('entity/user/register').customPOST(
+            JSON.stringify({"name":[{"value": user.name}],"mail":[{"value": user.email}]}),
+            undefined, // put your path here
+            undefined, // params here, e.g. {format: "json"}
+            {ContentType: 'application/json', Accept: 'application/json'}
+          );
+        }
+      }
+    })
+
     // Get token Service.
     .factory('getTokenService', function(Restangular) {
       return {
@@ -52,4 +66,3 @@
     })
 
 })();
-
