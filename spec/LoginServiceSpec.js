@@ -19,10 +19,9 @@ describe('ngDrupal Unit Tests:', function() {
     var user = {name:"marthinal", pass:"shhhhThisIsMySecret"};
     // httpBackend would append a "/" in front of a restangular call
     httpBackend.expectPOST('http://MySiteSuperPoweredByDrupal/user_login', {"op":"login","credentials":{"name": "marthinal", "pass": "shhhhThisIsMySecret"}})
-      // respond with the mock
       .respond();
     // now call our service
-    var newRes = loginService.login(user);
+    loginService.login(user);
     // handle restangular expectations
     expect(Restangular.one).toHaveBeenCalledWith('user_login');
     // flush the backend to unproxy the restangular promise
