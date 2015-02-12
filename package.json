@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/marthinal/ngDrupal/issues"
   },
-  "homepage": "https://github.com/marthinal/ngDrupal"
+  "homepage": "https://github.com/marthinal/ngDrupal",
+  "devDependencies": {
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.5"
+  }
 }
