@@ -67,5 +67,20 @@ describe('ngDrupal Unit Tests:', function() {
     httpBackend.flush();
   }));
 
+  // GET TOKEN.
+  it('Unit Test for getTokenService', inject(function(getTokenService) {
+    // set up a spy on Restangular, so we test with what parameters it was called, also allow the call to continue
+    spyOn(Restangular, 'one').and.callThrough();
+    // httpBackend would append a "/" in front of a restangular call
+    httpBackend.expectGET('http://MySiteSuperPoweredByDrupal/rest/session/token')
+      .respond();
+    // now call our service
+    getTokenService.getToken();
+    // handle restangular expectations
+    expect(Restangular.one).toHaveBeenCalledWith('rest/session/token');
+    // flush the backend to unproxy the restangular promise
+    httpBackend.flush();
+  }));
+
 });
 
