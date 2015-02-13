@@ -30,7 +30,6 @@ describe('ngDrupal Unit Tests:', function() {
 
 
   it('Unit Test for logoutService', inject(function($rootScope, $q, logoutService, getTokenService) {
-    // set up a spy on Restangular, so we test with what parameters it was called, also allow the call to continue
     deferred = $q.defer();
     // set up a spy on Restangular, so we test with what parameters it was called, also allow the call to continue
     spyOn(Restangular, 'one').and.callThrough();
