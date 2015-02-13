@@ -27,7 +27,7 @@
     // Logout Service.
     .factory('logoutService', function(Restangular, getTokenService) {
       return {
-        logout:function(token) {
+        logout:function() {
           return getTokenService.getToken()
             .then(function(token) {
               return Restangular.one('user_login').customPOST(
