@@ -35,7 +35,7 @@
             undefined, // params here, e.g. {format: "json"}
             {ContentType: 'application/json', Accept: 'application/json'}
           ).then(function(result) {
-              Session.create(result.uid[0].value, result.name[0].value, result.langcode[0].value, result.created[0].value);
+              Session.create(result.uid[0].value, result.name[0].value, result.langcode[0].value);
             });
         },
 
