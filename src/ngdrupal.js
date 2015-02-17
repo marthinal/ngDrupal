@@ -8,18 +8,17 @@
       RestangularProvider.setDefaultHttpFields({withCredentials: true});
     })
 
-    // Remove this Service if you want to use your own session from your app.
     .service('DrupalSession', function () {
       // TODO TBD session fields.
-      this.create = function (userId, userName, userLangcode) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userLangcode = userLangcode;
+      this.create = function (user, sessionName, sessId) {
+        this.user = user;
+        this.sessionName = sessionName;
+        this.sessId = sessId;
       };
       this.destroy = function () {
-        this.userId = null;
-        this.userName = null;
-        this.userLangcode = null;
+        this.user = null;
+        this.sessionName = null;
+        this.sessId = null;
       };
       return this;
     })
@@ -37,17 +36,14 @@
             {ContentType: 'application/json', Accept: 'application/json'}
             // Remove if you want to use your own session from your app.
           ).then(function(result) {
-              DrupalSession.create(result.uid[0].value, result.name[0].value, result.langcode[0].value);
+              DrupalSession.create(result.user, result.sessionName, result.sessId);
             });
         },
 
         logout:function() {
           return this.getToken()
             .then(function(token) {
-
-              // Remove if you want to use your own session from your app.
               DrupalSession.destroy();
-
               return Restangular.one('user_login').customPOST(
                 JSON.stringify({"op": "logout"}),
                 undefined, // put your path here
@@ -59,8 +55,7 @@
         },
 
         isAuthenticated:function() {
-          // Use your own session here if you are not using the DrupalSession Service.
-          return !!DrupalSession.userId;
+          return !!DrupalSession.user.uid[0].value;
         },
 
         getToken:function() {
