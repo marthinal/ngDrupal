@@ -55,7 +55,7 @@
         },
 
         isAuthenticated:function() {
-          return !!DrupalSession.user.uid[0].value;
+          return DrupalSession.user && !!DrupalSession.user.uid[0].value;
         },
 
         getToken:function() {
