@@ -1,13 +1,13 @@
 describe('AuthService and RegisterService:', function() {
-
   var httpBackend, Restangular, q, scope;
 
-  beforeEach(module('ngdrupal', function($provide) {
+  beforeEach(module('ngdrupal', function($provide, RestangularProvider) {
     // Mock DrupalSession Service.
     $provide.service('DrupalSession', function() {
       this.create = function() {};
       this.destroy = function() {};
     });
+    RestangularProvider.setBaseUrl('http://MySiteSuperPoweredByDrupal/');
   }));
   // then we use the $injector to obtain the instances of the services we would like to mock/use
   // but not of the service that we want to test
@@ -91,21 +91,8 @@ describe('AuthService and RegisterService:', function() {
 });
 
 
-
 describe('DrupalSession:', function() {
-
-  var httpBackend, Restangular, q, scope;
-
   beforeEach(module('ngdrupal'));
-  // then we use the $injector to obtain the instances of the services we would like to mock/use
-  // but not of the service that we want to test
-  beforeEach(inject(function(_Restangular_, _$httpBackend_, $q, $rootScope) {
-    httpBackend = _$httpBackend_;
-    Restangular = _Restangular_;
-    q = $q;
-    scope = $rootScope.$new();
-  }));
-
   // Create, DrupalSession service.
   it('Should create a session', inject(function(DrupalSession) {
     var user = {user:"user", sessionName:"sessionName", sessId:"sessId"};
