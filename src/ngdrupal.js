@@ -3,17 +3,15 @@
   var module = angular.module('ngdrupal', ['restangular'])
     // Set the Base url.
     .config(function(RestangularProvider) {
-      // Base Url.
-      RestangularProvider.setBaseUrl('http://MySiteSuperPoweredByDrupal/');
       RestangularProvider.setDefaultHttpFields({withCredentials: true});
     })
 
     .service('DrupalSession', function () {
       // TODO TBD session fields.
-      this.create = function (user, sessionName, sessId) {
-        this.user = user;
-        this.sessionName = sessionName;
-        this.sessId = sessId;
+      this.create = function (user) {
+        this.user = user.user;
+        this.sessionName = user.sessionName;
+        this.sessId = user.sessId;
       };
       this.destroy = function () {
         this.user = null;
@@ -36,7 +34,7 @@
             {ContentType: 'application/json', Accept: 'application/json'}
             // Remove if you want to use your own session from your app.
           ).then(function(result) {
-              DrupalSession.create(result.user, result.sessionName, result.sessId);
+              DrupalSession.create(result);
             });
         },
 
