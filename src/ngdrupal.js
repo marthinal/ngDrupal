@@ -93,7 +93,7 @@
               return $q.all(promises);
             });
         },
-        create:function(entityType, bundle, values) {
+        create: function(entityType, bundle, values) {
           return AuthService.getToken()
             .then(function(token) {
               // Building the json.
@@ -116,7 +116,7 @@
               );
             });
         },
-        delete:function(entityType, id) {
+        delete: function(entityType, id) {
           return AuthService.getToken()
             .then(function(token) {
               return Restangular.one( entityType + '/' + id).customDELETE(

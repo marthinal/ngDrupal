@@ -58,7 +58,7 @@ List of available services:
 ## ENTITY SERVICE.
 
 ### CRUD operations.
-####This resource uses hal+json as format by default. We can improve it/refactor later.
+#####This resource uses hal+json as format by default. We can improve it/refactor later.
 
 ### Create Multiple Nodes.
 
@@ -137,3 +137,11 @@ List of available services:
      });
 
  ```
+
+### Delete.
+
+```
+// i.e. You can delete your user account
+EntityService.delete('user', DrupalSession.user.uid[0].value);
+```
+
