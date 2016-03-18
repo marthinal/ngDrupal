@@ -9,10 +9,11 @@ Angular module for Drupal 8 Rest Services using cookie sessions. Actually this
 
 List of available services:
 
-AUTHSERVICE:
+## AUTHSERVICE:
+
+### Login (ionic app (http://ionicframework.com/))
 
  ```
-  // Login for an ionic(http://ionicframework.com/) app
   // user.name = 'marthinal'
   // user.pass = 'supersecretpass'
   $scope.login = function(user) {
@@ -28,8 +29,10 @@ AUTHSERVICE:
         });
     });
   };
+ ```
 
-  // Logout for an ionic(http://ionicframework.com/) app.
+### LogOut (ionic app (http://ionicframework.com/))
+ ```
   $scope.logout = function() {
     AuthService.logout()
       // Go to "Login tab".
@@ -52,12 +55,14 @@ AUTHSERVICE:
 
  ```
 
-ENTITY SERVICE for CRUD operations. This resource uses hal+json as format by
-default. We can improve it/refactor later.
+## ENTITY SERVICE.
 
- ```
-Create Multiple Nodes.
+### CRUD operations.
+####This resource uses hal+json as format by default. We can improve it/refactor later.
 
+### Create Multiple Nodes.
+
+  ```
     for (var i = 0; i < $scope.foo.length; i++) {
       var obj = $scope.foo[i];
       values[i] = {};
@@ -76,17 +81,17 @@ Create Multiple Nodes.
 
         }
       );
+  ```
 
 
+### Create a user:
 
-Create a user:
-
+  ```
   var values = {
     name: "marthinal",
     mail: "marthinal@example.com"
   };
 
-  $scope.test = function() {
     EntityService.create('user', 'user', values)
       .then(function(entity) {
 
@@ -94,11 +99,11 @@ Create a user:
       .catch(function() {
 
       });
-  };
+  ```
 
+###Upload a file:
 
-Upload a file:
-
+  ```
  var pictureValues = {
    filename: "default.jpg",
    filemime: "image/jpg",
@@ -113,22 +118,22 @@ Upload a file:
 
  });
 
+  ```
 
- Create a taxonomy term:
+### Create a taxonomy term:
 
+  ```
    var values = {
      vid: 'tags',
      name: 'myTerm'
    };
 
-   $scope.test = function() {
-     EntityService.create('taxonomy_term', 'tags', values)
-       .then(function(entity) {
+   EntityService.create('taxonomy_term', 'tags', values)
+     .then(function(entity) {
 
-       })
-       .catch(function() {
+     })
+     .catch(function() {
 
-       });
-   };
+     });
 
  ```
