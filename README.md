@@ -51,3 +51,84 @@ AUTHSERVICE:
       });
 
  ```
+
+ENTITY SERVICE for CRUD operations. This resource uses hal+json as format by
+default. We can improve it/refactor later.
+
+ ```
+Create Multiple Nodes.
+
+    for (var i = 0; i < $scope.foo.length; i++) {
+      var obj = $scope.foo[i];
+      values[i] = {};
+      values[i]["_embedded"] = {};
+      values[i]["title"] = obj.name;
+      // Attaching ER.
+      values[i]["_embedded"][myConfig.url + "/rest/relation/node/bundle/myfield"] = [{"uuid":[{"value": obj.uuid}]}];
+    }
+
+    EntityService.createMultiple('node', 'myBundle', values)
+      .then(
+        function(result) {
+
+        },
+        function(error) {
+
+        }
+      );
+
+
+
+Create a user:
+
+  var values = {
+    name: "marthinal",
+    mail: "marthinal@example.com"
+  };
+
+  $scope.test = function() {
+    EntityService.create('user', 'user', values)
+      .then(function(entity) {
+
+      })
+      .catch(function() {
+
+      });
+  };
+
+
+Upload a file:
+
+ var pictureValues = {
+   filename: "default.jpg",
+   filemime: "image/jpg",
+   data: imageData
+  };
+
+ EntityService.create('file', 'file', pictureValues)
+   .then(function(entity) {
+
+   })
+   .catch(function() {
+
+ });
+
+
+ Create a taxonomy term:
+
+   var values = {
+     vid: 'tags',
+     name: 'myTerm'
+   };
+
+   $scope.test = function() {
+     EntityService.create('taxonomy_term', 'tags', values)
+       .then(function(entity) {
+
+       })
+       .catch(function() {
+
+       });
+   };
+
+ ```

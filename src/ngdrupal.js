@@ -62,6 +62,73 @@
       }
     })
 
+    // ENTITY SERVICE for CRUD operations.
+    .factory('EntityService', function(myConfig, Restangular, AuthService, $q) {
+      return {
+        createMultiple: function(entityType, bundle, values) {
+          return AuthService.getToken()
+            .then(function(token) {
+              var promises = [];
+              angular.forEach(values, function(data) {
+                // Building the json.
+                var request = {};
+                request = {"_links": {"type": {"href": myConfig.url + '/rest/type/' + entityType + '/' + bundle}}};
+                // Adds values per field.
+                angular.forEach(data, function(value, key) {
+                  if (value !== null && typeof value !== "object") {
+                    request[key] = [{"value": value}];
+                  }
+                  else if(typeof value === "object") {
+                    request[key] = value;
+                  }
+                });
+                var promise = Restangular.one('entity/' + entityType).customPOST(
+                  JSON.stringify(request),
+                  undefined, // Path
+                  undefined, // Params {format: "json"}
+                  {"Content-Type": 'application/hal+json', Accept: 'application/hal+json', 'X-CSRF-Token': token}
+                );
+                promises.push(promise);
+              });
+              return $q.all(promises);
+            });
+        },
+        create:function(entityType, bundle, values) {
+          return AuthService.getToken()
+            .then(function(token) {
+              // Building the json.
+              var request = {};
+              request = {"_links": {"type": {"href": myConfig.url + '/rest/type/' + entityType + '/' + bundle}}};
+              // Add values per field to the json.
+              angular.forEach(values, function(value, key) {
+                if (value !== null && typeof value !== "object") {
+                  request[key] = [{"value": value}];
+                }
+                else if(typeof value === "object") {
+                  request[key] = value;
+                }
+              });
+              return Restangular.one('entity/' + entityType).customPOST(
+                JSON.stringify(request),
+                undefined, // Path
+                undefined, // Params {format: "json"}
+                {"Content-Type": 'application/hal+json', Accept: 'application/hal+json', 'X-CSRF-Token': token}
+              );
+            });
+        },
+        delete:function(entityType, id) {
+          return AuthService.getToken()
+            .then(function(token) {
+              return Restangular.one( entityType + '/' + id).customDELETE(
+                undefined, // Path
+                undefined, // Params {format: "json"}
+                {"Content-Type": 'application/hal+json', Accept: 'application/hal+json', 'X-CSRF-Token': token}
+              );
+            });
+        }
+      };
+    })
+
     // REGISTER SERVICE. Apply https://www.drupal.org/node/2291055
     .factory('RegisterService', function(Restangular) {
       return {
