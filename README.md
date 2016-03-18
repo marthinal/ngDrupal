@@ -141,7 +141,7 @@ List of available services:
 ### Delete.
 
 ```
-// i.e. You can delete your user account
+// i.e. You can delete your own user account.
 EntityService.delete('user', DrupalSession.user.uid[0].value);
 ```
 
