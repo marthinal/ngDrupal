@@ -11,9 +11,11 @@ List of available services:
 
 ## AUTHSERVICE:
 
-### Login (ionic app (http://ionicframework.com/))
+### Login:
+#### @See https://www.drupal.org/node/2403307
 
  ```
+  // (ionic app (http://ionicframework.com/))
   // user.name = 'marthinal'
   // user.pass = 'supersecretpass'
   $scope.login = function(user) {
@@ -31,8 +33,9 @@ List of available services:
   };
  ```
 
-### LogOut (ionic app (http://ionicframework.com/))
+### LogOut:
  ```
+  // (ionic app (http://ionicframework.com/))
   $scope.logout = function() {
     AuthService.logout()
       // Go to "Login tab".
@@ -60,7 +63,7 @@ List of available services:
 ### CRUD operations.
 #####This resource uses hal+json as format by default. We can improve it/refactor later.
 
-### Create Multiple Nodes.
+### Create Multiple Nodes:
 
   ```
     for (var i = 0; i < $scope.foo.length; i++) {
@@ -102,7 +105,7 @@ List of available services:
   ```
 
 ###Upload a file:
-
+#### @See https://www.drupal.org/node/1927648
   ```
  var pictureValues = {
    filename: "default.jpg",
@@ -138,7 +141,7 @@ List of available services:
 
  ```
 
-### Delete.
+### Delete:
 
 ```
 // i.e. You can delete your own user account.
